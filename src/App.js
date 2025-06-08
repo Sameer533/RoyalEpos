@@ -1,10 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import SalesScreen from './screens/SalesScreen';
 
 function App() {
   return (
     <div className="App">
-      Royal Epos
+      <SalesScreen />
     </div>
   );
 }

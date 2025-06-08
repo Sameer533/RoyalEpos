@@ -1,0 +1,135 @@
+/* Page layout */
+.sales-screen {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  padding: 24px;
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f6f8;
+  min-height: 100vh;
+}
+
+/* Left side - filters and product grid */
+.left-panel {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Search + category filters */
+.filters {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filters input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+/* Category buttons */
+.category-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.category-buttons button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: #e0e0e0;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.category-buttons button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Right side - cart section */
+.cart-wrapper {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 400px;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+/* Cart product items */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item-name {
+  font-weight: 500;
+}
+
+.cart-qty {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.cart-qty button {
+  padding: 4px 8px;
+  font-size: 14px;
+  border: none;
+  background-color: #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cart-remove {
+  background: none;
+  color: red;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Total & checkout section */
+.cart-total {
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.payment-buttons {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.payment-buttons button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.payment-buttons button:hover {
+  background-color: #218838;
+}
