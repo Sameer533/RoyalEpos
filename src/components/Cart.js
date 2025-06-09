@@ -8,11 +8,12 @@ const Cart = ({ cart, onIncrease, onDecrease, onRemove }) => {
   const tax = +(subtotal * 0.07).toFixed(2);
   const total = +(subtotal + tax).toFixed(2);
   
-// if(total <=0){
-//     alert("Cart Empty hai laude");
-//     return;
-//   }
+
   const handleCheckout = async (paymentMethod) => {
+    if (cart.length === 0) {
+    alert("🛒 Your cart is empty!");
+    return;
+  }
     const order = {
       storeId: "sevenpos-store-1", // Adjust for multi-store use later
       timestamp: serverTimestamp(),
@@ -26,7 +27,7 @@ const Cart = ({ cart, onIncrease, onDecrease, onRemove }) => {
 
     try {
       await addDoc(collection(db, "orders"), order);
-      alert(`Order placed using ${paymentMethod}`);
+      // alert(`Order placed using ${paymentMethod}`);
      // window.location.reload(); // Quick reset after order placed
 
      window.location.href = "/receipt";
