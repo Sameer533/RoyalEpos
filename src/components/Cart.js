@@ -7,7 +7,11 @@ const Cart = ({ cart, onIncrease, onDecrease, onRemove }) => {
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const tax = +(subtotal * 0.07).toFixed(2);
   const total = +(subtotal + tax).toFixed(2);
-
+  
+// if(total <=0){
+//     alert("Cart Empty hai laude");
+//     return;
+//   }
   const handleCheckout = async (paymentMethod) => {
     const order = {
       storeId: "sevenpos-store-1", // Adjust for multi-store use later
@@ -23,7 +27,10 @@ const Cart = ({ cart, onIncrease, onDecrease, onRemove }) => {
     try {
       await addDoc(collection(db, "orders"), order);
       alert(`Order placed using ${paymentMethod}`);
-      window.location.reload(); // Quick reset after order placed
+     // window.location.reload(); // Quick reset after order placed
+
+     window.location.href = "/receipt";
+
     } catch (error) {
       console.error("Checkout Error:", error);
       alert("Failed to place order.");
