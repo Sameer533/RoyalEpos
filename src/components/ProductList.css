@@ -1,0 +1,49 @@
+.product-list {
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 900px;
+  background: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+.product-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-list th,
+.product-list td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.edit-btn,
+.delete-btn {
+  margin: 0 4px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+.save-btn {
+  background-color: #28a745;
+  color: white;
+  margin-right: 5px;
+}
+
+.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+}
