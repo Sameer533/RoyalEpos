@@ -6,6 +6,7 @@ import ProductAddForm from './components/ProductAddForm';
 import ProductList from './components/ProductList';
 import KeypadModal from './components/KeypadModal';
 import Receipt from './components/Receipt';
+import SalesReports from './components/SalesReports';
 
 function App() {
   return (
@@ -33,8 +34,8 @@ function App() {
           } />
           <Route path="/receipt" element={<Receipt />} />
 
-          {/* In future: Add Sales Report route here */}
-          {/* <Route path="/sales-report" element={<SalesReport />} /> */}
+        <Route path="/sales-report" element={<SalesReports/>} />
+
         </Routes>
       </div>
     </Router>
