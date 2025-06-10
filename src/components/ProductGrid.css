@@ -43,3 +43,32 @@
   font-weight: bold;
   color: #333;
 }
+.fixed-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.fixed-action {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  flex: 1;
+  min-width: 120px;
+}
+
+.high-grocery {
+  background-color: #f0b400;
+  color: #fff;
+}
+
+.no-sale {
+  background-color: #e53935;
+  color: #fff;
+}

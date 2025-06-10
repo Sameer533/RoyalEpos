@@ -1,5 +1,8 @@
 // src/components/Cart.js
 import React from 'react';
+import { toast } from 'react-toastify';
+
+
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // Make sure path is correct
 
@@ -11,9 +14,11 @@ const Cart = ({ cart, onIncrease, onDecrease, onRemove }) => {
 
   const handleCheckout = async (paymentMethod) => {
     if (cart.length === 0) {
-    alert("🛒 Your cart is empty!");
-    return;
-  }
+      toast.warning("🛒 Your cart is empty!", {
+        position: "top-center",
+      });
+      return;
+    }
     const order = {
       storeId: "sevenpos-store-1", // Adjust for multi-store use later
       timestamp: serverTimestamp(),

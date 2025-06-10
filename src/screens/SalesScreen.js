@@ -1,29 +1,102 @@
-// 🔥 Redesigned SalesScreen.js
-import React, { useState } from 'react';
+// src/screens/SalesScreen.js
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { useRef } from 'react';
+import { collection, query, where, onSnapshot, getDocs } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 import ProductGrid from '../components/ProductGrid';
 import Cart from '../components/Cart';
 import '../styles/SalesScreen.css';
 
-const productList = [
-  { id: 1, name: 'Coffee', price: 2.5, category: 'Drinks', image: 'https://cdn-icons-png.flaticon.com/512/2935/2935359.png' },
-  { id: 2, name: 'Burger', price: 5, category: 'Food', image: 'https://cdn-icons-png.flaticon.com/512/3075/3075977.png' },
-  { id: 3, name: 'Hot Dog', price: 3, category: 'Food', image: 'https://cdn-icons-png.flaticon.com/512/1046/1046784.png' },
-  { id: 4, name: 'Soda', price: 1.5, category: 'Drinks', image: 'https://cdn-icons-png.flaticon.com/512/701/701995.png' },
-  { id: 5, name: 'Chips', price: 2, category: 'Snacks', image: 'https://cdn-icons-png.flaticon.com/512/4257/4257819.png' },
-  { id: 6, name: 'Donut', price: 2.2, category: 'Snacks', image: 'https://cdn-icons-png.flaticon.com/512/1046/1046786.png' },
-  { id: 7, name: 'DefCoffee', price: 2.5, category: 'Drinks', image: 'https://cdn-icons-png.flaticon.com/512/2935/2935359.png' },
-];
-
 const SalesScreen = () => {
+  const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
+const [selectedCategory, setSelectedCategory] = useState('Others');
   const [cart, setCart] = useState([]);
+ const [barcode, setBarcode] = useState('');
+  const barcodeInputRef = useRef(null);
 
-  const filteredProducts = productList.filter((product) => {
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'products'), (snapshot) => {
+      const productData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setProducts(productData);
+    });
+
+    return () => unsubscribe();
+  }, []);
+  useEffect(() => {
+  if (barcodeInputRef.current) {
+    barcodeInputRef.current.focus();
+  }
+}, []);
+
+
+  const filteredProducts = products.filter((product) => {
+     
+
     const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
+    if (search.trim() !== '') {
+    return matchesSearch;
+  }
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+const handleHighGrocery = () => {
+  const price = prompt("Enter price for High Grocery item:");
+
+  const parsed = parseFloat(price);
+  if (!isNaN(parsed) && parsed > 0) {
+    const newItem = {
+      id: Date.now(), // temporary unique ID
+      name: "High Grocery",
+      price: parsed,
+      quantity: 1,
+    };
+    setCart([...cart, newItem]);
+  } else {
+    toast.error("Invalid price entered");
+  }
+};
+const handleScanSubmit = async (e) => {
+  if (e.key === 'Enter') {
+    const upc = barcode.trim();
+    if (!upc) return;
+
+    try {
+      const q = query(collection(db, 'products'), where('barcode', '==', upc));
+      const querySnapshot = await getDocs(q);
+      
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((doc) => {
+          const product = doc.data();
+          handleAddToCart({ ...product, id: doc.id });
+          toast.success(`${product.name} added to cart`);
+        });
+      } else {
+        toast.error('Product not found!');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('Error fetching product.');
+    }
+    
+    setBarcode('');
+  }
+};
+
+const handleNoSale = () => {
+  // 1. Open cash drawer (hardware integration)
+  // For now, simulate
+  toast.info("No Sale: Cash drawer opened.");
+
+  // 2. Optionally log in Firestore
+  // await addDoc(collection(db, "nosales"), { timestamp: new Date(), user: currentUser })
+
+  // 3. Ensure it's allowed when cart is empty
+};
 
   const handleAddToCart = (product) => {
     const existingItem = cart.find((item) => item.id === product.id);
@@ -61,6 +134,15 @@ const SalesScreen = () => {
 
   return (
     <div className="sales-screen">
+      <input
+  ref={barcodeInputRef}
+  type="text"
+  value={barcode}
+  onChange={(e) => setBarcode(e.target.value)}
+  onKeyDown={handleScanSubmit}
+  style={{ position: 'absolute' }}
+  autoFocus
+/>
       <div className="left-panel">
         <div className="filters">
           <input
@@ -70,10 +152,10 @@ const SalesScreen = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
           <div className="category-buttons">
-            {['All', 'Drinks', 'Food', 'Snacks'].map((cat) => (
+            {['All', 'Hookah & Accessories	', 'Delta-8 / THC / CBD	', 'Disposables','Others'].map((cat) => (
               <button
                 key={cat}
-                onClick={() => setSelectedCategory(cat)}
+                onClick={() => setSelectedCategory(cat) }
                 className={selectedCategory === cat ? 'active' : ''}
               >
                 {cat}
@@ -81,8 +163,16 @@ const SalesScreen = () => {
             ))}
           </div>
         </div>
-        <ProductGrid products={filteredProducts} onAddToCart={handleAddToCart} />
+            
+       <ProductGrid
+  products={filteredProducts}
+  onAddToCart={handleAddToCart}
+  onHighGrocery={handleHighGrocery}
+  onNoSale={handleNoSale}
+  
+/>
       </div>
+
       <Cart
         cart={cart}
         onIncrease={increaseQty}

@@ -60,10 +60,10 @@ const ProductAddForm = () => {
       />
       <select name="category" value={product.category} onChange={handleChange} required>
         <option value="">Select Category</option>
-        <option value="Drinks">Drinks</option>
-        <option value="Snacks">Snacks</option>
-        <option value="Food">Food</option>
-        <option value="Donations">Donations</option>
+        <option value="Disposables">Disposables</option>
+        <option value="Hookah & Accessories	">Hookah & Accessories	</option>
+        <option value="Delta-8 / THC / CBD	">Delta-8 / THC / CBD	</option>
+        <option value="Others">Others</option>
       </select>
       <button type="submit">Add Product</button>
     </form>
