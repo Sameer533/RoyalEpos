@@ -1,5 +1,7 @@
 /* Page layout */
 .sales-screen {
+   max-width: 1400px;
+ 
   display: flex;
   flex-direction: row;
   gap: 24px;
@@ -52,84 +54,8 @@
 }
 
 .category-buttons button.active {
-  background-color: #007bff;
+  background-color: #5edaeb;
   color: white;
 }
 
-/* Right side - cart section */
-.cart-wrapper {
-  flex: 1;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  max-width: 400px;
-  height: fit-content;
-  position: sticky;
-  top: 20px;
-}
 
-/* Cart product items */
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.cart-item-name {
-  font-weight: 500;
-}
-
-.cart-qty {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.cart-qty button {
-  padding: 4px 8px;
-  font-size: 14px;
-  border: none;
-  background-color: #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.cart-remove {
-  background: none;
-  color: red;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-/* Total & checkout section */
-.cart-total {
-  margin-top: 16px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.payment-buttons {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.payment-buttons button {
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  background-color: #28a745;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.payment-buttons button:hover {
-  background-color: #218838;
-}

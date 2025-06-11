@@ -7,11 +7,12 @@ import { db } from '../firebaseConfig';
 import ProductGrid from '../components/ProductGrid';
 import Cart from '../components/Cart';
 import '../styles/SalesScreen.css';
+import Sidebar from '../components/Sidebar';
 
 const SalesScreen = () => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
-const [selectedCategory, setSelectedCategory] = useState('Others');
+const [selectedCategory, setSelectedCategory] = useState('All');
   const [cart, setCart] = useState([]);
  const [barcode, setBarcode] = useState('');
   const barcodeInputRef = useRef(null);
@@ -140,9 +141,11 @@ const handleNoSale = () => {
   value={barcode}
   onChange={(e) => setBarcode(e.target.value)}
   onKeyDown={handleScanSubmit}
-  style={{ position: 'absolute' }}
+  style={{ position: 'absolute', left:'-9999px' }}
   autoFocus
 />
+      <Sidebar/>
+      
       <div className="left-panel">
         <div className="filters">
           <input

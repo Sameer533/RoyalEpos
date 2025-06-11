@@ -1,74 +1,41 @@
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 16px;
-  width: 50%;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  overflow-y: auto;
 }
 
-/* Each product card (tile) */
+/* Unified look for product and fixed buttons */
 .product-card {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  text-align: center;
+  height: 100px;
+  padding: 16px;
+  border: none; 
+  border-radius: 12px;
+  background-color: white;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  height: 150px;
+  transition: 0.2s ease-in-out;
+  text-align: center;
 }
 
 .product-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #f0f0f0;
+}
+/* Styled fixed buttons like product tiles */
+.fixed-action.high-grocery {
+  background-color: #28a745;
+  color: white;
 }
 
-/* Product image styling */
-.product-img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
-
-/* Product name and price */
-.product-card div {
-  font-size: 14px;
-  margin-top: 4px;
-}
-
-.product-card div:last-child {
-  font-weight: bold;
-  color: #333;
-}
-.fixed-buttons {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.fixed-action {
-  padding: 12px 16px;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  flex: 1;
-  min-width: 120px;
-}
-
-.high-grocery {
-  background-color: #f0b400;
-  color: #fff;
-}
-
-.no-sale {
-  background-color: #e53935;
-  color: #fff;
+.fixed-action.no-sale {
+  background-color: #dc3545;
+  color: white;
 }
