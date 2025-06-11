@@ -1,6 +1,6 @@
 /* Page layout */
 .sales-screen {
-   max-width: 1400px;
+  /* border: 1px solid black; */
  
   display: flex;
   flex-direction: row;

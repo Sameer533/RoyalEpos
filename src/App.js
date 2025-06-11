@@ -9,7 +9,7 @@ import ProductList from "./components/ProductList";
 import KeypadModal from "./components/KeypadModal";
 import Receipt from "./components/Receipt";
 import SalesReports from "./components/SalesReports";
-
+import './App.css';
 function App() {
   return (
     <Router>
